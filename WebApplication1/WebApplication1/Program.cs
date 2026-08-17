@@ -1,4 +1,4 @@
-var builder = HW_50_LabWork.CreateBuilder(args);
+var builder = WebApplication1.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
