@@ -1,0 +1,46 @@
+@model List<WebApplication1.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Products</h1>
+
+<a asp-action="Create" asp-controller="Product" class="btn btn-primary">Create new product</a>
+
+<br />
+<br />
+
+@if (Model.Count == 0)
+{
+    <p>There are no products yet.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="height: 250px; object-fit: cover;" />
+
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+
+                        <p class="card-text">
+                            <b>Price:</b> @product.Price
+                        </p>
+
+                        <p class="card-text">
+                            <b>Added:</b> @product.CreatedOn.ToString("dd.MM.yyyy")
+                        </p>
+
+                        <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-outline-primary">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
