@@ -25,6 +25,7 @@
     <ItemGroup>
       <Folder Include="Views\Brand\" />
       <Folder Include="Views\Category\" />
+      <Folder Include="Views\Order\" />
       <Folder Include="Views\Product\" />
       <Folder Include="wwwroot\photos\" />
     </ItemGroup>

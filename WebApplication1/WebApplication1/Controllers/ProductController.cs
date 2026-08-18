@@ -24,11 +24,11 @@ public class ProductController : Controller
     {
         ViewBag.Categories = new SelectList(_context.Categories.ToList(), "Id", "Name");
         ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "Name");
+
         return View();
     }
 
     [HttpPost]
-
     public IActionResult Create(Product product)
     {
         bool categoryExists = _context.Categories.Any(c => c.Id == product.CategoryId);
@@ -39,19 +39,19 @@ public class ProductController : Controller
             ViewBag.Message = "Please choose existing category and brand";
             ViewBag.Categories = new SelectList(_context.Categories.ToList(), "Id", "Name");
             ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "Name");
-            
+
             return View(product);
         }
-        
+
         product.Name = product.Name?.Trim() ?? "";
         product.Description = product.Description?.Trim() ?? "";
         product.ImageUrl = product.ImageUrl?.Trim() ?? "";
         product.CreatedOn = DateTime.Now;
         product.ModifiedOn = DateTime.Now;
-        
+
         _context.Products.Add(product);
         _context.SaveChanges();
-        
+
         return RedirectToAction("Index");
     }
     

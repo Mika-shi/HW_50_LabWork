@@ -35,9 +35,15 @@ else
                             <b>Added:</b> @product.CreatedOn.ToString("dd.MM.yyyy")
                         </p>
 
-                        <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-outline-primary">
-                            Details
-                        </a>
+                        <div class="d-flex gap-2">
+                            <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn btn-outline-primary">
+                                Details
+                            </a>
+
+                            <a asp-action="Create" asp-controller="Order" asp-route-id="@product.Id" class="btn btn-success">
+                                Order
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
