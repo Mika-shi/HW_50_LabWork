@@ -45,4 +45,28 @@ public class CategoryController : Controller
 
         return RedirectToAction("Index");
     }
+    
+    public IActionResult Delete(int id)
+    {
+        Category? category = _context.Categories.FirstOrDefault(c => c.Id == id);
+
+        if (category == null)
+        {
+            TempData["Message"] = "Category was not found";
+            return RedirectToAction("Index");
+        }
+
+        bool hasProducts = _context.Products.Any(p => p.CategoryId == id);
+
+        if (hasProducts)
+        {
+            TempData["Message"] = "This category cannot be deleted because it has products.";
+            return RedirectToAction("Index");
+        }
+
+        _context.Categories.Remove(category);
+        _context.SaveChanges();
+
+        return RedirectToAction("Index");
+    }
 }

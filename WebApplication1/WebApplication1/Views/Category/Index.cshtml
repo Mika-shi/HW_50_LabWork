@@ -10,7 +10,9 @@
 
 @if (TempData["Message"] != null)
 {
-    <p class="text-danger">@TempData["Message"]</p>
+    <div class="alert alert-warning">
+        @TempData["Message"]
+    </div>
 }
 
 @if (Model.Count == 0)
