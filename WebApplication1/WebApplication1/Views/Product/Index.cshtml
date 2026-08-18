@@ -6,14 +6,53 @@
 
 <h1>Products</h1>
 
-<a asp-action="Create" asp-controller="Product" class="btn btn-primary">Create new product</a>
+<a asp-action="Create" asp-controller="Product" class="btn btn-primary">
+    Create new product
+</a>
+
+<a asp-action="Index" asp-controller="Order" class="btn btn-secondary">
+    Orders
+</a>
 
 <br />
+<br />
+
+<form asp-action="Index" asp-controller="Product" method="get" class="row g-3">
+    <div class="col-md-4">
+        <label>Category</label>
+        <select name="categoryId" asp-items="ViewBag.Categories" class="form-control">
+            <option value="">All categories</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label>Brand</label>
+        <select name="brandId" asp-items="ViewBag.Brands" class="form-control">
+            <option value="">All brands</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label>&nbsp;</label>
+        <div>
+            <button type="submit" class="btn btn-primary">
+                Filter
+            </button>
+
+            <a asp-action="Index" asp-controller="Product" class="btn btn-secondary">
+                Reset
+            </a>
+        </div>
+    </div>
+</form>
+
 <br />
 
 @if (Model.Count == 0)
 {
-    <p>There are no products yet.</p>
+    <div class="alert alert-warning">
+        No products found.
+    </div>
 }
 else
 {

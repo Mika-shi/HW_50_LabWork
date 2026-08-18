@@ -14,10 +14,23 @@ public class ProductController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int? categoryId, int? brandId)
     {
-        List<Product> products = _context.Products.Include(p => p.Category).Include(p => p.Brand).ToList();
-        return View(products);
+        var products = _context.Products.Include(p => p.Category).Include(p => p.Brand).AsQueryable();
+        if (categoryId != null)
+        {
+            products = products.Where(p => p.CategoryId == categoryId);
+        }
+
+        if (brandId != null)
+        {
+            products = products.Where(p => p.BrandId == brandId);
+        }
+        
+        ViewBag.Categories = new SelectList(_context.Categories.ToList(), "Id", "Name", categoryId);
+        ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "Name", brandId);
+        
+        return View(products.ToList());
     }
 
     public IActionResult Create()
